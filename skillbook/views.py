@@ -28,11 +28,13 @@ def vote(request, resource_id):
 	if direction == 'up':
 		if vote:
 			vote.direction = True
+			vote.save()
 		else:
 			Vote.objects.create(user=request.user, resource=resource, direction=True)
 	if direction == 'down':
 		if vote:
 			vote.direction = False
+			vote.save()
 		else:
 			Vote.objects.create(user=request.user, resource=resource, direction=False)
 	if skill_id:

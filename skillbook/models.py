@@ -42,3 +42,20 @@ class Vote(models.Model):
 	def url(self): return self.id
 	def __unicode__(self):
 		return self.user.username + ' : ' + self.resource.name
+
+class Review(models.Model):
+	resource = models.ForeignKey(Resource)
+	user = models.ForeignKey(User)
+	creation_date = models.DateTimeField('date created')
+	content = models.CharField(max_length=10000)
+	title = models.CharField(max_length=40)
+
+	def __unicode__(self):
+		return title
+
+class ReviewComment(models.Model):
+	review = models.ForeignKey(Review)
+	user = models.ForeignKey(User)
+	creation_date = models.DateTimeField('date created')
+	content = models.CharField(max_length=5000)
+
