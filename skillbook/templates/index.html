@@ -1,0 +1,22 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Skillbook' %}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'Skillbook' %}</h1>
+{% endblock %}
+
+{% block content %}
+{% if skills %}
+    <ul>
+    {% for skill in skills %}
+        <li><a href="/skills/{{ skill.id }}/">{{ skill.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No skills are available.</p>
+{% endif %}
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h3>Resource List</h3>
+	{% if resources %}
+	<table class="table-bordered">
+		<tr>
+			<th>Resource</th>
+			<th>Skill</th>
+			<th>User</th>
+			<th>Creation Date</th>
+		</tr>
+    {% for r in resources %}
+		<tr>
+			<td><a href="/resources/{{ r.url }}">{{ r.name }}</a></td>
+			<td><a href="/skills/{{ r.skill.url }}">{{ r.skill.name }}</a></td>
+			<td><a href="/users/{{ r.user.url }}">{{ r.user.username }}</a></td>
+			<td>{{ r.creation_date }}</td>
+		</tr>
+    {% endfor %}
+	</table>
+	{% endif %}
+{% endblock %}
+{% block links %}
+    <li><a href="/addskill">Add Skill</a></li>
+    <li><a href="/addresource">Add Resource</a></li>
+{% endblock %}

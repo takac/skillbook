@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h1>Welcome to Skillbook</h1>
+Here you will find all the resources you need to get learning any skill you
+want right away.
+{% if skills %}
+<h4>Lastest Skills</h4>
+    <ul>
+    {% for skill in skills %}
+        <li><a href="/skills/{{ skill.id }}/">{{ skill.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No skills are available.</p>
+{% endif %}
+
+{% endblock %}
+
+{% block links %}
+    <li><a href="/addskill">Add Skill</a></li>
+    <li><a href="/addresource">Add Resource</a></li>
+{% endblock %}

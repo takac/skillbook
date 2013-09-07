@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h1>Skill List</h1>
+	{% if skills %}
+	<table class="table">
+		<tr>
+			<th>Skill</th>
+			<th>User</th>
+			<th>Creation Date</th>
+		</tr>
+    {% for skill in skills %}
+		<tr>
+			<td><a href="/skills/{{ skill.url }}">{{ skill.name }}</a></td>
+			<td><a href="/users/{{ skill.user.url }}">{{ skill.user.username }}</a></td>
+			<td>{{ skill.creation_date }}</td>
+		</tr>
+    {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block links %}
+    <li><a href="/addskill">Add Skill</a></li>
+    <li><a href="/addresource">Add Resource</a></li>
+{% endblock %}

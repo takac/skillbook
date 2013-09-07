@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>The Skillbook</title>
+        <meta name="description" content="some description">
+        <meta name="author" content="Tom">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		{% load staticfiles %}
+        <link rel="stylesheet" href="{% static "css/bootstrap.css" %}" media="screen">
+
+        <style type="text/css">
+            body {
+                padding-top: 60px;
+            }
+        </style>
+		{% block head %}{% endblock %}
+    </head>
+
+    <body>
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="{% static "js/bootstrap.js" %}"></script>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li><a href="/skills">Skills List</a></li>
+                            <li><a href="/resources">Resource List</a></li>
+                            {% if user %}
+							<li><a href="/account">{{user.username}}</a></li>
+                            <li><a href="/logout">Sign Out</a></li>
+                            {% else %}
+                            <li><a href="/login">Sign In</a></li>
+                            <li><a href="/adduser">Create Account</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="span3 bs-docs-sidebar">
+                    <ul class="nav nav-list bs-docs-sidenav affix">
+                        <li class="nav-header">Links</li>
+                        {% block links %}{% endblock %}
+                    </ul>
+                </div>
+                <div class="span9">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
+        {% block bottom %}{% endblock %}
+    </body>
+</html>

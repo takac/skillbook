@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block body %}
+<form action="/account" method="POST">
+    <h3>{{ escape(user) }}</h3>
+    <p>Email: <input type="text" name="email" value="{{ escape(email) }}"></p>
+    <p>Password: <input type="password" name="password"></p>
+    <p><input type="submit" value="Update Account Details"></p>
+</form>
+<p><a href="/users/{{ escape(user) }}">User Activity</a></p>
+{% end %}

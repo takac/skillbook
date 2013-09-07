@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block body %}
+{% if len(skills) == 1 %}
+<h3>Add Resource to {{ escape(skills[0]) }}</h3>
+{% else %}
+<h3>Add Resource</h3>
+{% end %}
+<form action="/addresource" method="POST">
+    <p>
+        Resource Name <input type="text" name="name"/>
+    </p>
+    {% if len(skills) == 1 %}
+    <p>
+    <input type="hidden" name="skill" value="{{escape(skills[0])}}"/>
+    {% else %}
+    Associated Skill <select name="skill" required>
+        {% for i in skills %}
+        <option value={{ escape(i) }}>{{ escape(i) }}</option>
+        {% end %}
+    </select>
+    {% end %}
+    </p>
+    <p>
+        Description: <input type="text" name="description"/>
+    </p>
+    <p>
+        Link: <input type="text" name="Link"/>
+    </p>
+    <input type="submit"/>
+</form>
+{% end %}

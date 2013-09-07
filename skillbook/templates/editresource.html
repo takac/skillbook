@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h3>Edit Resource</h3>
+<form action="/editresource" method="POST">
+    <p>
+    Resource Name <input type="text" name="name" value="{{ escape(name) }}"/>
+    </p>
+    Associated Skill <select name="skill" value="{{ escape(skill) }}" required>
+        {% for i in skills %}
+        <option value={{ escape(i) }}>{{ escape(i) }}</option>
+        {% end %}
+    </select>
+    </p>
+    <p>
+    Description: <input type="text" name="description" value="{{ escape(description) }}"/>
+    </p>
+    <p>
+    Link: <input type="text" name="Link" value="{{ escape(link) }}"/>
+    </p>
+    <input type="submit"/>
+</form>
+{% end %}
