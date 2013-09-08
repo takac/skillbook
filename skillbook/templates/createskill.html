@@ -2,17 +2,13 @@
 
 {% block body %}
 <h3>Add Skill</h3>
-<form action="/addskill" method="POST">
-    <p>
-        Name <input type="text" name="name"/>
-    </p>
-    <p>
-        Description <input type="text" name="description"/>
-    </p>
+<form action="/skills/create/" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
     <p><input type="submit"/></p>
 </form>
-{% end %}
+{% endblock %}
 {% block links %}
-    <li class="active"><a href="/addskill">Add Skill</a></li>
+    <li class="active"><a href="/skills/create">Add Skill</a></li>
     <li><a href="/addresource">Add Resource</a></li>
-{% end %}
+{% endblock %}

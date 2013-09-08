@@ -1,18 +1,20 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django import forms
 from django.shortcuts import render
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.http import Http404
-import logging
+from django.contrib.auth import authenticate, login, logout
 
 from skillbook.models import Skill, Resource, Vote
-
-logger = logging.getLogger(__name__)
 
 def index(request):
     skills = Skill.objects.order_by('creation_date')[:5]
     context = { 'skills': skills }
     return render(request, 'home.html', context)
+
+def logout_view(request):
+    return logout(request)
 
 @login_required
 def vote(request, resource_id):
@@ -70,6 +72,50 @@ def activity(request):
     context = { 'resources': resources, 'skills': skills }
     return render(request, 'users.html', context)
 
+class CreateUserForm(forms.Form):
+    username = forms.CharField(max_length=25)
+    password = forms.CharField(max_length=40, widget=forms.PasswordInput())
+    email = forms.EmailField()
+
+def adduser(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/?status=auth')
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            User.objects.create_user(username=username,
+                    password=password,
+                    email=form.cleaned_data['email'])
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return HttpResponseRedirect('/?status=success') # redirect to success
+        else:
+            return render(request, 'createuser.html', { "form": form } )
+
+    form = CreateUserForm()
+    return render(request, 'createuser.html', { "form": form } )
+
+class CreateSkillForm(forms.Form):
+    name = forms.CharField(max_length=25)
+    description = forms.CharField(max_length=200, widget=forms.Textarea)
+
+@login_required
+def skill_create(request):
+    if request.method == 'GET':
+        return render(request, 'createskill.html', { 'form': CreateSkillForm() })
+    if request.method == 'POST':
+        form = CreateSkillForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            time = timezone.now()
+            Skill.objects.create(user=request.user,
+                    name=name, description=description,creation_date=time)
+            return HttpResponseRedirect('/skills/')
+        else:
+            return render(request, 'createskill.html', { "form": form } )
 
 def skills_list(request):
     skills = Skill.objects.order_by('creation_date')[:10]
@@ -99,5 +145,37 @@ def resources_list(request):
     resources = Resource.objects.order_by('creation_date')[:10]
     context = { 'resources': resources }
     return render(request, 'resources.html', context)
+
+class CreateResourceForm(forms.Form):
+    name = forms.CharField(max_length=40)
+    link = forms.CharField(max_length=200)
+    description = forms.CharField(max_length=200, widget=forms.Textarea)
+    skill = forms.ModelChoiceField(queryset=Skill.objects.all())
+
+def resource_create(request):
+    if request.method == 'GET':
+        initial = {}
+        if request.GET.get('skill', ''):
+            try:
+                initial['skill'] = Skill.objects.get(name=request.GET.get('skill',''))
+            except Skill.DoesNotExist:
+                pass
+
+        form = CreateResourceForm(initial=initial)
+        return render(request, 'createresource.html', { 'form': form })
+    if request.method == 'POST':
+        form = CreateResourceForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            link = form.cleaned_data['link']
+            skill = form.cleaned_data['skill']
+            time = timezone.now()
+            Resource.objects.create(user=request.user,
+                    name=name, description=description,creation_date=time, link=link,skill=skill)
+            return HttpResponseRedirect('/skills/')
+        else:
+            return render(request, 'createresource.html', { "form": form } )
+
 
 
