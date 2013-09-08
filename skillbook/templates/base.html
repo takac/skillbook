@@ -30,11 +30,12 @@
                             <li><a href="/skills">Skills List</a></li>
                             <li><a href="/resources">Resource List</a></li>
                             {% if user %}
-							<li><a href="/account">{{user.username}}</a></li>
-                            <li><a href="/logout">Sign Out</a></li>
+							<li><a href="/accounts/profile">{{user.username}}</a></li>
+                            <li><a href="/accounts/activity">{{ user.score }}</a></li>
+                            <li><a href="/accounts/logout">Sign Out</a></li>
                             {% else %}
-                            <li><a href="/login">Sign In</a></li>
-                            <li><a href="/adduser">Create Account</a></li>
+                            <li><a href="/accounts/login">Sign In</a></li>
+                            <li><a href="/accounts/adduser">Create Account</a></li>
                             {% endif %}
                         </ul>
                     </div>

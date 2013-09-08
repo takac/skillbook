@@ -13,7 +13,7 @@
 			<td>
 				{% if o.vote %}
 					{% if o.vote.direction %}
-					<a href="/resources/{{o.resource.url}}/vote?skill={{skill.id}}&amp;v=none" style="color: orange">&#x25B2;</a>
+					<a href="/resources/{{o.resource.url}}/vote?skill={{skill.id}}&amp;v=none" style="text-decoration: none; color: orange">&#x25B2;</a>
 					{% else %}
 				<a href="/resources/{{o.resource.url}}/vote?skill={{skill.id}}&amp;v=up" style="text-decoration: none; color: inherit">&#x25B2;</a>
 					{% endif %}

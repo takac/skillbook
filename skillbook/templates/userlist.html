@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h1>Users</h1>
+	{% if users %}
+	<table class="table">
+		<tr>
+			<th>Points</th>
+			<th>User</th>
+			<th>Join Date</th>
+		</tr>
+    {% for user in users %}
+		<tr>
+			<td>{{ user.score }}</td>
+			<td><a href="/users/{{ user.url }}">{{ user.username }}</a></td>
+			<td>{{ user.date_joined }}</td>
+		</tr>
+    {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block links %}
+    <li><a href="/addskill">Add Skill</a></li>
+    <li><a href="/addresource">Add Resource</a></li>
+{% endblock %}

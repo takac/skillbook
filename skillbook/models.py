@@ -5,7 +5,19 @@ from django.contrib import auth
 def user_url(self):
 	return self.username
 
+def user_score(self):
+	score = 0
+	# combine vote score
+	for i in self.resource_set.all():
+		score += i.vote_sum()
+	# 4 for adding a resource
+	score += self.resource_set.count() * 4
+	# 3 for adding skill
+	score += self.skill_set.count() * 3
+	return score
+
 auth.models.User.add_to_class('url', user_url)
+auth.models.User.add_to_class('score', user_score)
 
 class Skill(models.Model):
 	name = models.CharField(max_length=50)

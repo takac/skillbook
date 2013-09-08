@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 {% block body %}
-<form action="/login" method="POST">
-    <p>Name: <input type="text" name="user"></p>
-    <p>Password: <input type="password" name="password"></p>
-    {% if next_url %}
-    <input type="hidden" name="next" value="{{ escape(next_url) }}"/>
-    {% end %}
+{% if form.errors %}
+<p>Your username or password didn't match. Try again</p>
+{% endif %}
+<form action="{% url 'django.contrib.auth.views.login' %}" method="POST">
+    <p>{{ form.username.label_tag }} {{ form.username }}</p>
+    <p>{{ form.password.label_tag }} {{ form.password }}</p>
+    {% if next %}
+    <input type="hidden" name="next" value="{{ next }}"/>
+    {% endif %}
+    {% csrf_token %}
     <input type="submit" value="Sign in">
 </form>
-{% end %}
+{% endblock %}

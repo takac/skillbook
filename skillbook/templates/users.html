@@ -1,25 +1,25 @@
 {% extends "base.html" %}
 
 {% block body %}
-<h3>{{ escape(username) }}</h3>
-    {% if len(resources) > 0 %}
+<h3>{{ username }}</h3>
+    {% if resources %}
     <h4>Resources Added</h4>
-    {% for i in resources %}
-    <p><a href="/resources/{{ escape(i) }}">{{ escape(i) }}</a></p>
-    {% end %}
+		{% for i in resources %}
+    <p><a href="/resources/{{ i.url }}">{{ i }}</a></p>
+		{% endfor %}
     {% else %}
     <h4>No skills added by user</h4>
-    {% end %}
-    {% if len(skills) > 0 %}
+    {% endif %}
+    {% if skills %}
     <h4>Skills Added</h4>
-    {% for i in skills %}
-    <p><a href="/skills/{{ escape(i) }}">{{ escape(i) }}</a></p>
-    {% end %}
+		{% for i in skills %}
+    <p><a href="/skills/{{ i.url }}">{{ i }}</a></p>
+		{% endfor %}
     {% else %}
     <h4>No skills added by user</h4>
-    {% end %}
-{% end %}
+    {% endif %}
+{% endblock %}
 {% block links %}
     <li><a href="/addskill">Add Skill</a></li>
     <li><a href="/addresource">Add Resource</a></li>
-{% end %}
+{% endblock %}
