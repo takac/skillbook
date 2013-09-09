@@ -1,6 +1,7 @@
 from django.contrib import admin
-from skillbook.models import Skill, Resource, Vote
+from voting.models import Vote
+from skillbook.models import Skill, Resource, ScoreConst
 
 admin.site.register(Skill)
 admin.site.register(Resource)
-admin.site.register(Vote)
+# admin.site.register(Vote)

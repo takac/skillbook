@@ -1,6 +1,14 @@
+from re import sub
 from django.db import models
+from django.db.models import Sum, Avg
 from django.contrib.auth.models import User
 from django.contrib import auth
+
+from voting.models import Vote
+
+class ScoreConst():
+	create_resource_score = 5
+	create_skill_score = 2
 
 def user_url(self):
 	return self.username
@@ -9,11 +17,11 @@ def user_score(self):
 	score = 0
 	# combine vote score
 	for i in self.resource_set.all():
-		score += i.vote_sum()
+		score += i.score()
 	# 4 for adding a resource
-	score += self.resource_set.count() * 4
+	score += self.resource_set.count() * ScoreConst.create_resource_score
 	# 3 for adding skill
-	score += self.skill_set.count() * 3
+	score += self.skill_set.count() * ScoreConst.create_skill_score
 	return score
 
 auth.models.User.add_to_class('url', user_url)
@@ -31,6 +39,7 @@ class Skill(models.Model):
 
 class Resource(models.Model):
 	name = models.CharField(max_length=50)
+	score = models.SmallIntegerField()
 	description = models.CharField(max_length=200)
 	link = models.CharField(max_length=100)
 	skill = models.ForeignKey(Skill)
@@ -38,22 +47,19 @@ class Resource(models.Model):
 	creation_date = models.DateTimeField('date created')
 
 	def url(self): return self.id
-	def vote_sum(self):
-		down = Vote.objects.filter(direction=False, resource=self).count()
-		up = Vote.objects.filter(direction=True, resource=self).count()
-		return (up - down)
-
+	def stripped_link(self):
+		clean = sub('(https?)?(://)?(www.)?', '', self.link)
+		return sub('/$','', clean)
 	def __unicode__(self):
 		return self.name
 
-class Vote(models.Model):
-	resource = models.ForeignKey(Resource)
-	user = models.ForeignKey(User)
-	direction = models.BooleanField()
+def denormalize_votes(sender, instance, created=False, **kwargs):
+    instance.object.score = Vote.objects.get_score(instance.object)['score']
+    instance.object.save()
 
-	def url(self): return self.id
-	def __unicode__(self):
-		return self.user.username + ' : ' + self.resource.name
+models.signals.post_save.connect(denormalize_votes, sender=Vote)
+models.signals.post_delete.connect(denormalize_votes, sender=Vote)
+
 
 class Review(models.Model):
 	resource = models.ForeignKey(Resource)

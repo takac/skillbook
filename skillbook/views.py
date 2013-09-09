@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.db.models import Sum, Avg
 from django import forms
 from django.shortcuts import render
 from django.utils import timezone
@@ -6,7 +7,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
-from skillbook.models import Skill, Resource, Vote
+from voting.models import Vote
+
+from skillbook.models import Skill, Resource, ScoreConst
 
 def index(request):
     skills = Skill.objects.order_by('creation_date')[:5]
@@ -21,26 +24,23 @@ def vote(request, resource_id):
     direction = request.GET.get('v', '')
     skill_id = request.GET.get('skill', '')
     resource = Resource.objects.get(id=resource_id)
-    votes = Vote.objects.filter(resource=resource, user=request.user)
-    vote = None
-    if votes.exists():
-        vote = votes[0]
+    vote = Vote.objects.get_for_user(resource, request.user)
 
     if direction == 'none':
         if vote:
             vote.delete()
     if direction == 'up':
         if vote:
-            vote.direction = True
+            vote.vote = 1
             vote.save()
         else:
-            Vote.objects.create(user=request.user, resource=resource, direction=True)
+            Vote.objects.record_vote(resource, request.user, 1)
     if direction == 'down':
         if vote:
-            vote.direction = False
+            vote.vote = -1
             vote.save()
         else:
-            Vote.objects.create(user=request.user, resource=resource, direction=False)
+            Vote.objects.record_vote(resource, request.user, -1)
     if skill_id:
         return HttpResponseRedirect('/skills/'+skill_id)
     else:
@@ -56,20 +56,20 @@ def users_list(request):
 
 def users(request, username):
     try:
-        user = User.objects.get(username=username)
+        view_user = User.objects.get(username=username)
     except User.DoesNotExist:
         raise Http404
 
-    resources = user.resource_set.all()
-    skills = user.skill_set.all()
-    context = { 'resources': resources, 'skills': skills }
+    resources = view_user.resource_set.all()
+    skills = view_user.skill_set.all()
+    context = { 'resources': resources, 'skills': skills, 'view_user': view_user}
     return render(request, 'users.html', context)
 
 @login_required
 def activity(request):
     resources = request.user.resource_set.all()
     skills = request.user.skill_set.all()
-    context = { 'resources': resources, 'skills': skills }
+    context = { 'resources': resources, 'skills': skills, 'view_user': request.user, 'score_const': ScoreConst()}
     return render(request, 'users.html', context)
 
 class CreateUserForm(forms.Form):
@@ -124,14 +124,14 @@ def skills_list(request):
 
 def skill(request, skill_id):
     skill = Skill.objects.get(id=skill_id)
-    resources = skill.resource_set.all()
+    resources = skill.resource_set.all().order_by('-score')
+
     o = []
     for r in resources:
         d = {'resource': r}
         if request.user.is_authenticated():
             try:
-                v = Vote.objects.get(user=request.user, resource=r)
-                d['vote'] = v
+                d['vote'] = Vote.objects.get_for_user(r, request.user)
             except Vote.DoesNotExist:
                 pass
         o.append(d)
@@ -139,7 +139,7 @@ def skill(request, skill_id):
     return render(request, 'skill.html', context)
 
 def resource(request, resource_id):
-    return HttpResponse("Looking at resource %s" % resource_id)
+    return render(request, 'resource.html', { 'resource': Resource.objects.get(id=resource_id)})
 
 def resources_list(request):
     resources = Resource.objects.order_by('creation_date')[:10]

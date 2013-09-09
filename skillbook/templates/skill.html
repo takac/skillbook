@@ -7,12 +7,13 @@
 		<tr>
 			<th>Votes</th>
 			<th>Resource</th>
+			<th>Link</th>
 		</tr>
     {% for o in comp %}
 		<tr>
 			<td>
 				{% if o.vote %}
-					{% if o.vote.direction %}
+                    {% if o.vote.vote == 1 %}
 					<a href="/resources/{{o.resource.url}}/vote?skill={{skill.id}}&amp;v=none" style="text-decoration: none; color: orange">&#x25B2;</a>
 					{% else %}
 				<a href="/resources/{{o.resource.url}}/vote?skill={{skill.id}}&amp;v=up" style="text-decoration: none; color: inherit">&#x25B2;</a>
@@ -20,9 +21,13 @@
 				{% else %}
 				<a href="/resources/{{o.resource.url}}/vote?skill={{skill.id}}&amp;v=up" style="text-decoration: none; color: inherit">&#x25B2;</a>
 				{% endif %}
-				{{ o.resource.vote_sum }}
+                {% if o.resource.score %}
+                    {{ o.resource.score }}
+                {% else %}
+                    0
+                {% endif %}
 				{% if o.vote %}
-					{% if not o.vote.direction %}
+					{% if o.vote.vote == -1 %}
 				<a href="/resources/{{o.resource.url}}/vote?skill={{skill.id}}&amp;v=none" style="text-decoration: none; color: blue">&#x25BC;</a>
 					{% else %}
 				<a href="/resources/{{o.resource.url}}/vote?skill={{skill.id}}&amp;v=down" style="text-decoration: none; color: inherit">&#x25BC;</a>
@@ -31,7 +36,12 @@
 				<a href="/resources/{{o.resource.url}}/vote?skill={{skill.id}}&amp;v=down" style="text-decoration: none; color: inherit">&#x25BC;</a>
 				{% endif %}
 			</td>
-			<td><a href="/resources/{{ o.resource.id }}">{{ o.resource.name }}</a></td>
+            <td>
+                <a href="/resources/{{ o.resource.id }}">{{ o.resource.name }}</a>
+            </td>
+            <td>
+                <a href="{{ o.resource.link }}">{{ o.resource.stripped_link|truncatechars:55 }}</a>
+            </td>
 		</tr>
     {% endfor %}
     {% endif %}
