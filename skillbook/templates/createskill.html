@@ -2,7 +2,7 @@
 
 {% block body %}
 <h3>Add Skill</h3>
-<form action="/skills/create/" method="POST">
+<form action="/skills/{{submit_to}}/" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <p><input type="submit"/></p>

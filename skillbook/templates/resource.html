@@ -2,8 +2,9 @@
 
 {% block body %}
 <h3>
-    <a href="{{resource.link}}">{{ resource.name }}</a>
+    {{ resource.name }}
 </h3>
+<p><a href="{{resource.link}}">{{ resource.stripped_link }}</a></p>
 <p>{{ resource.description }}</p>
 {% endblock %}
 {% block links %}

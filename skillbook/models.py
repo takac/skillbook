@@ -16,8 +16,8 @@ def user_url(self):
 def user_score(self):
 	score = 0
 	# combine vote score
-	for i in self.resource_set.all():
-		score += i.score()
+	for r in self.resource_set.all():
+		score += r.score
 	# 4 for adding a resource
 	score += self.resource_set.count() * ScoreConst.create_resource_score
 	# 3 for adding skill
@@ -32,6 +32,8 @@ class Skill(models.Model):
 	description = models.CharField(max_length=200)
 	user = models.ForeignKey(User)
 	creation_date = models.DateTimeField('date created')
+	update_date = models.DateTimeField('last updated')
+	last_updated_user = models.ForeignKey(User, related_name='resource_last_updated_user')
 
 	def url(self): return self.id
 	def __unicode__(self):
@@ -45,6 +47,8 @@ class Resource(models.Model):
 	skill = models.ForeignKey(Skill)
 	user = models.ForeignKey(User)
 	creation_date = models.DateTimeField('date created')
+	update_date = models.DateTimeField('last updated')
+	last_updated_user = models.ForeignKey(User, related_name='skill_last_updated_user')
 
 	def url(self): return self.id
 	def stripped_link(self):
@@ -65,6 +69,7 @@ class Review(models.Model):
 	resource = models.ForeignKey(Resource)
 	user = models.ForeignKey(User)
 	creation_date = models.DateTimeField('date created')
+	update_date = models.DateTimeField('last updated')
 	content = models.CharField(max_length=10000)
 	title = models.CharField(max_length=40)
 
@@ -75,5 +80,6 @@ class ReviewComment(models.Model):
 	review = models.ForeignKey(Review)
 	user = models.ForeignKey(User)
 	creation_date = models.DateTimeField('date created')
+	update_date = models.DateTimeField('last updated')
 	content = models.CharField(max_length=5000)
 

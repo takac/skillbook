@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h1>Skill Search</h1>
+<div>
+    <label for="skill-search">Skill Search</label>
+    <input type="text" name="skill-search" value="" id="skill-search">
+</div>
+<div>
+    <label for="selected">Selected:</label>
+    <input type="text" name="selected" value="" id="selected">
+</div>
+
+{% endblock %}
+
+{% block links %}
+<li><a href="/skills/create">Add Skill</a></li>
+<li><a href="/resources/create">Add Resource</a></li>
+{% endblock %}
+{% block bottom %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static "js/skillcomplete.js" %}"></script>
+{% endblock %}

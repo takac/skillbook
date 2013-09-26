@@ -1,3 +1,4 @@
+import json
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.db.models import Sum, Avg
 from django import forms
@@ -104,7 +105,7 @@ class CreateSkillForm(forms.Form):
 @login_required
 def skill_create(request):
     if request.method == 'GET':
-        return render(request, 'createskill.html', { 'form': CreateSkillForm() })
+        return render(request, 'createskill.html', { 'form': CreateSkillForm(), 'submit_to': 'create' })
     if request.method == 'POST':
         form = CreateSkillForm(request.POST)
         if form.is_valid():
@@ -115,12 +116,49 @@ def skill_create(request):
                     name=name, description=description,creation_date=time)
             return HttpResponseRedirect('/skills/')
         else:
-            return render(request, 'createskill.html', { "form": form } )
+            return render(request, 'createskill.html', { "form": form, 'submit_to': 'create'} )
+
+def skill_edit(request, skill_id):
+    if request.method == 'GET':
+        skill = Skill.objects.get(id=skill_id);
+        init = {};
+        init['name'] = skill.name
+        init['description'] = skill.description
+        form = CreateSkillForm(init);
+        return render(request, 'createskill.html', { "form": form, 'submit_to': skill_id+'/edit'} )
+    if request.method == 'POST':
+        form = CreateSkillForm(request.POST)
+        if form.is_valid():
+            skill = Skill.objects.get(id=skill_id)
+            skill.name = form.cleaned_data['name']
+            skill.description = form.cleaned_data['description']
+            skill.save()
+            return HttpResponseRedirect('/skills/')
+        else:
+            return render(request, 'createskill.html', { "form": form, 'submit_to': 'create'} )
 
 def skills_list(request):
     skills = Skill.objects.order_by('creation_date')[:10]
     context = { 'skills': skills }
     return render(request, 'skills.html', context)
+
+def skills_search(request):
+    return render(request, 'autocomplete.html', {})
+
+def skills_json(request):
+    term = request.GET.get('term', '')
+    skills = Skill.objects.order_by('creation_date')
+    if term:
+        skills = [skill for skill in skills if term.lower() in skill.name.lower()]
+    d = {}
+    for i in skills:
+        xd = {}
+        xd['name'] = i.name
+        xd['id'] = i.id
+        xd['creation_date'] = i.creation_date.strftime("%H:%M:%S %d/%m/%Y")
+        d[i.id] = xd
+
+    return HttpResponse(json.dumps(d), content_type="application/json")
 
 def skill(request, skill_id):
     skill = Skill.objects.get(id=skill_id)
@@ -142,15 +180,43 @@ def resource(request, resource_id):
     return render(request, 'resource.html', { 'resource': Resource.objects.get(id=resource_id)})
 
 def resources_list(request):
-    resources = Resource.objects.order_by('creation_date')[:10]
+    resources = Resource.objects.order_by('creation_date')
     context = { 'resources': resources }
     return render(request, 'resources.html', context)
+
+def resources_json(request):
+    resources = Resource.objects.order_by('creation_date')
+    return HttpResponse(json.dumps(resources), content_type="application/json")
 
 class CreateResourceForm(forms.Form):
     name = forms.CharField(max_length=40)
     link = forms.CharField(max_length=200)
     description = forms.CharField(max_length=200, widget=forms.Textarea)
     skill = forms.ModelChoiceField(queryset=Skill.objects.all())
+
+def resource_edit(request, resource_id):
+    if request.method == 'GET':
+        resource = Resource.objects.get(id=resource_id)
+        init = {}
+        init['name'] = resource.name
+        init['description'] = resource.description
+        init['link'] = resource.link
+        init['skill'] = resource.skill.id
+        form = CreateResourceForm(init)
+        return render(request, 'createresource.html', { 'form': form, 'submit_to': resource_id+'/edit' })
+    if request.method == 'POST':
+        form = CreateResourceForm(request.POST)
+        if form.is_valid():
+            resource = Resource.objects.get(id=resource_id)
+            resource.name = form.cleaned_data['name']
+            resource.description = form.cleaned_data['description']
+            resource.link = form.cleaned_data['link']
+            resource.skill = form.cleaned_data['skill']
+            resource.save()
+            return HttpResponseRedirect('/skills/'+str(resource.skill.id)+'/')
+        else:
+            return render(request, 'createresource.html', { "form": form } )
+
 
 def resource_create(request):
     if request.method == 'GET':
@@ -162,7 +228,7 @@ def resource_create(request):
                 pass
 
         form = CreateResourceForm(initial=initial)
-        return render(request, 'createresource.html', { 'form': form })
+        return render(request, 'createresource.html', { 'form': form, 'submit_to': 'create'})
     if request.method == 'POST':
         form = CreateResourceForm(request.POST)
         if form.is_valid():
@@ -171,9 +237,9 @@ def resource_create(request):
             link = form.cleaned_data['link']
             skill = form.cleaned_data['skill']
             time = timezone.now()
-            Resource.objects.create(user=request.user,
+            resouce = Resource.objects.create(user=request.user,
                     name=name, description=description,creation_date=time, link=link,skill=skill)
-            return HttpResponseRedirect('/skills/')
+            return HttpResponseRedirect('/skills/'+resouce.skill.id+'/')
         else:
             return render(request, 'createresource.html', { "form": form } )
 

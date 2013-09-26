@@ -10,6 +10,7 @@
 
 		{% load staticfiles %}
         <link rel="stylesheet" href="{% static "css/bootstrap.css" %}" media="screen">
+        <link rel="stylesheet" href="{% static "css/lib/jquery-ui.css" %}" media="screen">
 
         <style type="text/css">
             body {
@@ -20,8 +21,9 @@
     </head>
 
     <body>
-        <script src="http://code.jquery.com/jquery.js"></script>
-        <script src="{% static "js/bootstrap.js" %}"></script>
+        <script type="text/javascript" src="{% static "js/lib/jquery.js" %}"></script>
+        <script type="text/javascript" src="{% static "js/lib/jquery-ui.js" %}"></script>
+        <script type="text/javascript" src="{% static "js/lib/bootstrap.js" %}"></script>
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
