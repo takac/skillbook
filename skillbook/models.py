@@ -58,6 +58,8 @@ class Resource(models.Model):
 		return self.name
 
 def denormalize_votes(sender, instance, created=False, **kwargs):
+    if kwargs['raw']:
+        return
     instance.object.score = Vote.objects.get_score(instance.object)['score']
     instance.object.save()
 
