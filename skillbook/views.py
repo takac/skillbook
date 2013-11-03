@@ -50,7 +50,7 @@ def vote(request, resource_id):
     else:
         return HttpResponseRedirect('/resources')
 
-def account(request):
+def user_profile(request):
     return render(request, 'account.html', None)
 
 def users_list(request):
@@ -126,6 +126,11 @@ def skill_create(request):
         else:
             return render(request, 'createskill.html', { "form": form, 'submit_to': 'create'} )
 
+def skill_delete(request, skill_id):
+    skill= Skill.objects.get(id=skill_id)
+    skill.delete()
+    return HttpResponseRedirect('/skills/')
+
 def skill_edit(request, skill_id):
     if request.method == 'GET':
         skill = Skill.objects.get(id=skill_id);
@@ -145,12 +150,12 @@ def skill_edit(request, skill_id):
         else:
             return render(request, 'createskill.html', { "form": form, 'submit_to': 'create'} )
 
-def skills_list(request):
+def skill_list(request):
     skills = Skill.objects.order_by('creation_date')[:10]
     context = { 'skills': skills }
     return render(request, 'skills.html', context)
 
-def skills_search(request):
+def skill_search(request):
     return render(request, 'autocomplete.html', {})
 
 def skills_json(request):
