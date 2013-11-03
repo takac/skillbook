@@ -1,0 +1,1370 @@
+[
+{
+  "pk": 1, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "permission", 
+    "name": "permission", 
+    "app_label": "auth"
+  }
+},
+{
+  "pk": 2, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "group", 
+    "name": "group", 
+    "app_label": "auth"
+  }
+},
+{
+  "pk": 3, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "user", 
+    "name": "user", 
+    "app_label": "auth"
+  }
+},
+{
+  "pk": 4, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "contenttype", 
+    "name": "content type", 
+    "app_label": "contenttypes"
+  }
+},
+{
+  "pk": 5, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "session", 
+    "name": "session", 
+    "app_label": "sessions"
+  }
+},
+{
+  "pk": 6, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "site", 
+    "name": "site", 
+    "app_label": "sites"
+  }
+},
+{
+  "pk": 7, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "poll", 
+    "name": "poll", 
+    "app_label": "polls"
+  }
+},
+{
+  "pk": 8, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "choice", 
+    "name": "choice", 
+    "app_label": "polls"
+  }
+},
+{
+  "pk": 9, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "logentry", 
+    "name": "log entry", 
+    "app_label": "admin"
+  }
+},
+{
+  "pk": 10, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "skill", 
+    "name": "skill", 
+    "app_label": "skillbook"
+  }
+},
+{
+  "pk": 11, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "review", 
+    "name": "review", 
+    "app_label": "skillbook"
+  }
+},
+{
+  "pk": 12, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "resource", 
+    "name": "resource", 
+    "app_label": "skillbook"
+  }
+},
+{
+  "pk": 15, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "reviewcomment", 
+    "name": "review comment", 
+    "app_label": "skillbook"
+  }
+},
+{
+  "pk": 16, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "vote", 
+    "name": "vote", 
+    "app_label": "voting"
+  }
+},
+{
+  "pk": "1xslknv49063o8n6heja1qlwjm6t2kqk", 
+  "model": "sessions.session", 
+  "fields": {
+    "expire_date": "2013-11-17T13:48:45.814Z", 
+    "session_data": "YWI5NzE3MDU1ZGNiMmVmZWM3ZWRhMzViN2IyNTNhODM1ZWI2YzM4ODqAAn1xAVgKAAAAdGVzdGNvb2tpZVgGAAAAd29ya2VkcQJzLg=="
+  }
+},
+{
+  "pk": "6fqee6mig6cwm74z6yyocjs8eu5qod62", 
+  "model": "sessions.session", 
+  "fields": {
+    "expire_date": "2013-11-17T09:52:08.971Z", 
+    "session_data": "NzhjNmU5MTBkYmQzYzAyYTk3YTE3ZmNkNGM2ZGJlNTcxMWMxYTY5YzqAAn1xAShVEl9hdXRoX3VzZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEDVQ1fYXV0aF91c2VyX2lkcQRLAXUu"
+  }
+},
+{
+  "pk": "kwh78vb8x2aqgd40oxq8xxo4t1iwthmi", 
+  "model": "sessions.session", 
+  "fields": {
+    "expire_date": "2013-11-17T17:54:46.524Z", 
+    "session_data": "MjNiMjRkM2QzNmIwMDYzOTQ3MGY4NmVhZjk2MmI5YTdmNGUxNmJmNzqAAn1xAS4="
+  }
+},
+{
+  "pk": "qopc9jua8lufrlcwlji44jjoq0iubvc3", 
+  "model": "sessions.session", 
+  "fields": {
+    "expire_date": "2013-11-17T19:18:27.129Z", 
+    "session_data": "NzhjNmU5MTBkYmQzYzAyYTk3YTE3ZmNkNGM2ZGJlNTcxMWMxYTY5YzqAAn1xAShVEl9hdXRoX3VzZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEDVQ1fYXV0aF91c2VyX2lkcQRLAXUu"
+  }
+},
+{
+  "pk": 1, 
+  "model": "sites.site", 
+  "fields": {
+    "domain": "example.com", 
+    "name": "example.com"
+  }
+},
+{
+  "pk": 1, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_permission", 
+    "name": "Can add permission", 
+    "content_type": 1
+  }
+},
+{
+  "pk": 2, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_permission", 
+    "name": "Can change permission", 
+    "content_type": 1
+  }
+},
+{
+  "pk": 3, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_permission", 
+    "name": "Can delete permission", 
+    "content_type": 1
+  }
+},
+{
+  "pk": 4, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_group", 
+    "name": "Can add group", 
+    "content_type": 2
+  }
+},
+{
+  "pk": 5, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_group", 
+    "name": "Can change group", 
+    "content_type": 2
+  }
+},
+{
+  "pk": 6, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_group", 
+    "name": "Can delete group", 
+    "content_type": 2
+  }
+},
+{
+  "pk": 7, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_user", 
+    "name": "Can add user", 
+    "content_type": 3
+  }
+},
+{
+  "pk": 8, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_user", 
+    "name": "Can change user", 
+    "content_type": 3
+  }
+},
+{
+  "pk": 9, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_user", 
+    "name": "Can delete user", 
+    "content_type": 3
+  }
+},
+{
+  "pk": 10, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_contenttype", 
+    "name": "Can add content type", 
+    "content_type": 4
+  }
+},
+{
+  "pk": 11, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_contenttype", 
+    "name": "Can change content type", 
+    "content_type": 4
+  }
+},
+{
+  "pk": 12, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_contenttype", 
+    "name": "Can delete content type", 
+    "content_type": 4
+  }
+},
+{
+  "pk": 13, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_session", 
+    "name": "Can add session", 
+    "content_type": 5
+  }
+},
+{
+  "pk": 14, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_session", 
+    "name": "Can change session", 
+    "content_type": 5
+  }
+},
+{
+  "pk": 15, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_session", 
+    "name": "Can delete session", 
+    "content_type": 5
+  }
+},
+{
+  "pk": 16, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_site", 
+    "name": "Can add site", 
+    "content_type": 6
+  }
+},
+{
+  "pk": 17, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_site", 
+    "name": "Can change site", 
+    "content_type": 6
+  }
+},
+{
+  "pk": 18, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_site", 
+    "name": "Can delete site", 
+    "content_type": 6
+  }
+},
+{
+  "pk": 19, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_poll", 
+    "name": "Can add poll", 
+    "content_type": 7
+  }
+},
+{
+  "pk": 20, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_poll", 
+    "name": "Can change poll", 
+    "content_type": 7
+  }
+},
+{
+  "pk": 21, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_poll", 
+    "name": "Can delete poll", 
+    "content_type": 7
+  }
+},
+{
+  "pk": 22, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_choice", 
+    "name": "Can add choice", 
+    "content_type": 8
+  }
+},
+{
+  "pk": 23, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_choice", 
+    "name": "Can change choice", 
+    "content_type": 8
+  }
+},
+{
+  "pk": 24, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_choice", 
+    "name": "Can delete choice", 
+    "content_type": 8
+  }
+},
+{
+  "pk": 25, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_logentry", 
+    "name": "Can add log entry", 
+    "content_type": 9
+  }
+},
+{
+  "pk": 26, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_logentry", 
+    "name": "Can change log entry", 
+    "content_type": 9
+  }
+},
+{
+  "pk": 27, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_logentry", 
+    "name": "Can delete log entry", 
+    "content_type": 9
+  }
+},
+{
+  "pk": 28, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_resource", 
+    "name": "Can add resource", 
+    "content_type": 10
+  }
+},
+{
+  "pk": 29, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_resource", 
+    "name": "Can change resource", 
+    "content_type": 10
+  }
+},
+{
+  "pk": 30, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_resource", 
+    "name": "Can delete resource", 
+    "content_type": 10
+  }
+},
+{
+  "pk": 31, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_skill", 
+    "name": "Can add skill", 
+    "content_type": 10
+  }
+},
+{
+  "pk": 32, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_skill", 
+    "name": "Can change skill", 
+    "content_type": 10
+  }
+},
+{
+  "pk": 33, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_skill", 
+    "name": "Can delete skill", 
+    "content_type": 10
+  }
+},
+{
+  "pk": 34, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_resource", 
+    "name": "Can add resource", 
+    "content_type": 12
+  }
+},
+{
+  "pk": 35, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_resource", 
+    "name": "Can change resource", 
+    "content_type": 12
+  }
+},
+{
+  "pk": 36, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_resource", 
+    "name": "Can delete resource", 
+    "content_type": 12
+  }
+},
+{
+  "pk": 40, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_review", 
+    "name": "Can add review", 
+    "content_type": 14
+  }
+},
+{
+  "pk": 41, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_review", 
+    "name": "Can change review", 
+    "content_type": 14
+  }
+},
+{
+  "pk": 42, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_review", 
+    "name": "Can delete review", 
+    "content_type": 14
+  }
+},
+{
+  "pk": 43, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_reviewcomment", 
+    "name": "Can add review comment", 
+    "content_type": 15
+  }
+},
+{
+  "pk": 44, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_reviewcomment", 
+    "name": "Can change review comment", 
+    "content_type": 15
+  }
+},
+{
+  "pk": 45, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_reviewcomment", 
+    "name": "Can delete review comment", 
+    "content_type": 15
+  }
+},
+{
+  "pk": 46, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_vote", 
+    "name": "Can add vote", 
+    "content_type": 16
+  }
+},
+{
+  "pk": 47, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_vote", 
+    "name": "Can change vote", 
+    "content_type": 16
+  }
+},
+{
+  "pk": 48, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_vote", 
+    "name": "Can delete vote", 
+    "content_type": 16
+  }
+},
+{
+  "pk": 49, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_review", 
+    "name": "Can add review", 
+    "content_type": 11
+  }
+},
+{
+  "pk": 50, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_review", 
+    "name": "Can change review", 
+    "content_type": 11
+  }
+},
+{
+  "pk": 51, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_review", 
+    "name": "Can delete review", 
+    "content_type": 11
+  }
+},
+{
+  "pk": 1, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "tomc", 
+    "first_name": "", 
+    "last_name": "", 
+    "is_active": true, 
+    "is_superuser": true, 
+    "is_staff": true, 
+    "last_login": "2013-11-03T19:18:26.984Z", 
+    "groups": [], 
+    "user_permissions": [], 
+    "password": "pbkdf2_sha256$10000$kBbwqWOQw1oy$NUZNIjkqPt4M74ht+isbwFiNxP+zLA1TkuFsT4eo4SQ=", 
+    "email": "", 
+    "date_joined": "2013-09-07T11:00:14Z"
+  }
+},
+{
+  "pk": 2, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "mike", 
+    "first_name": "", 
+    "last_name": "", 
+    "is_active": true, 
+    "is_superuser": false, 
+    "is_staff": false, 
+    "last_login": "2013-09-08T11:48:55.813Z", 
+    "groups": [], 
+    "user_permissions": [], 
+    "password": "pbkdf2_sha256$10000$x25jeNEPetiu$/QIVPTHxvNwz7JTG0daWU6rU/mh6ELGilSqEmxuaSVY=", 
+    "email": "m@gmial.com", 
+    "date_joined": "2013-09-08T11:48:55.813Z"
+  }
+},
+{
+  "pk": 3, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "nigel", 
+    "first_name": "", 
+    "last_name": "", 
+    "is_active": true, 
+    "is_superuser": false, 
+    "is_staff": false, 
+    "last_login": "2013-09-08T12:10:33.505Z", 
+    "groups": [], 
+    "user_permissions": [], 
+    "password": "pbkdf2_sha256$10000$jakVHBQEErDQ$IxuwAiu7A75Oxj9dvZmoD9vvpAkdf1NUgP5dfCjaeKo=", 
+    "email": "xx@gmail.com", 
+    "date_joined": "2013-09-08T12:10:32.864Z"
+  }
+},
+{
+  "pk": 2, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-09-07T18:39:49.493Z", 
+    "object_repr": "Skill object", 
+    "object_id": "1", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 10
+  }
+},
+{
+  "pk": 3, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-09-07T19:53:35.230Z", 
+    "object_repr": "Learning Python", 
+    "object_id": "1", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 12
+  }
+},
+{
+  "pk": 4, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-09-07T19:55:19.872Z", 
+    "object_repr": "Python in Practice", 
+    "object_id": "2", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 12
+  }
+},
+{
+  "pk": 6, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-09-07T20:11:18.808Z", 
+    "object_repr": "Learning Python", 
+    "object_id": "1", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 12
+  }
+},
+{
+  "pk": 7, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-09-07T20:36:23.256Z", 
+    "object_repr": "Python in Practice", 
+    "object_id": "2", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 12
+  }
+},
+{
+  "pk": 8, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2013-09-07T21:05:14.429Z", 
+    "object_repr": "tomc", 
+    "object_id": "1", 
+    "change_message": "Changed username and password.", 
+    "user": 1, 
+    "content_type": 3
+  }
+},
+{
+  "pk": 12, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-09-07T23:03:03.410Z", 
+    "object_repr": "Beginning Python", 
+    "object_id": "3", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 12
+  }
+},
+{
+  "pk": 13, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-09-08T15:58:26Z", 
+    "object_repr": "Knitting", 
+    "object_id": "3", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 10
+  }
+},
+{
+  "pk": 14, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-09-08T15:58:58.332Z", 
+    "object_repr": "Beginning Knitting", 
+    "object_id": "4", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 12
+  }
+},
+{
+  "pk": 15, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-09-09T20:19:58.728Z", 
+    "object_repr": "tomc: 1 on Learning Python", 
+    "object_id": "1", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 16
+  }
+},
+{
+  "pk": 16, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-09-09T20:20:12.805Z", 
+    "object_repr": "mike: 1 on Python in Practice", 
+    "object_id": "2", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 16
+  }
+},
+{
+  "pk": 17, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-09-09T20:20:25.836Z", 
+    "object_repr": "tomc: -1 on Beginning Python", 
+    "object_id": "3", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 16
+  }
+},
+{
+  "pk": 18, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-09-09T20:20:35.006Z", 
+    "object_repr": "mike: 1 on Beginning Knitting", 
+    "object_id": "4", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 16
+  }
+},
+{
+  "pk": 19, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-09-09T20:20:41.179Z", 
+    "object_repr": "nigel: 1 on Learning Python", 
+    "object_id": "5", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 16
+  }
+},
+{
+  "pk": 20, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 3, 
+    "action_time": "2013-09-09T20:53:05.058Z", 
+    "object_repr": "tomc: 1 on Python in Practice", 
+    "object_id": "6", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 16
+  }
+},
+{
+  "pk": 21, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 3, 
+    "action_time": "2013-09-09T20:53:05.213Z", 
+    "object_repr": "nigel: 1 on Learning Python", 
+    "object_id": "5", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 16
+  }
+},
+{
+  "pk": 22, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 3, 
+    "action_time": "2013-09-09T20:53:05.370Z", 
+    "object_repr": "mike: 1 on Beginning Knitting", 
+    "object_id": "4", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 16
+  }
+},
+{
+  "pk": 23, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 3, 
+    "action_time": "2013-09-09T20:53:05.537Z", 
+    "object_repr": "tomc: 1 on Beginning Python", 
+    "object_id": "3", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 16
+  }
+},
+{
+  "pk": 24, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 3, 
+    "action_time": "2013-09-09T20:53:05.704Z", 
+    "object_repr": "mike: 1 on Python in Practice", 
+    "object_id": "2", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 16
+  }
+},
+{
+  "pk": 25, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 3, 
+    "action_time": "2013-09-09T20:53:05.871Z", 
+    "object_repr": "tomc: -1 on Learning Python", 
+    "object_id": "1", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 16
+  }
+},
+{
+  "pk": 26, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-09-09T20:53:24.028Z", 
+    "object_repr": "nigel: 1 on Learning Python", 
+    "object_id": "1", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 16
+  }
+},
+{
+  "pk": 27, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-09-09T20:54:21.465Z", 
+    "object_repr": "mike: -1 on Python in Practice", 
+    "object_id": "3", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 16
+  }
+},
+{
+  "pk": 28, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-09-09T20:54:35.505Z", 
+    "object_repr": "nigel: 1 on Python in Practice", 
+    "object_id": "4", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 16
+  }
+},
+{
+  "pk": 29, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-09-09T21:20:32.980Z", 
+    "object_repr": "tomc: 1 on Oracle Learn Java", 
+    "object_id": "8", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 16
+  }
+},
+{
+  "pk": 30, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2013-09-10T21:13:40.626Z", 
+    "object_repr": "Java", 
+    "object_id": "2", 
+    "change_message": "Changed description.", 
+    "user": 1, 
+    "content_type": 10
+  }
+},
+{
+  "pk": 31, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2013-11-03T09:52:23.345Z", 
+    "object_repr": "Karate", 
+    "object_id": "4", 
+    "change_message": "Changed user and last_updated_user.", 
+    "user": 1, 
+    "content_type": 10
+  }
+},
+{
+  "pk": 32, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2013-11-03T09:52:28.988Z", 
+    "object_repr": "Kick Fencing", 
+    "object_id": "6", 
+    "change_message": "Changed user and last_updated_user.", 
+    "user": 1, 
+    "content_type": 10
+  }
+},
+{
+  "pk": 33, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2013-11-03T09:52:35.998Z", 
+    "object_repr": "Knitting", 
+    "object_id": "3", 
+    "change_message": "Changed user and last_updated_user.", 
+    "user": 1, 
+    "content_type": 10
+  }
+},
+{
+  "pk": 34, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2013-11-03T09:52:46.493Z", 
+    "object_repr": "Kick Boxing", 
+    "object_id": "5", 
+    "change_message": "Changed user and last_updated_user.", 
+    "user": 1, 
+    "content_type": 10
+  }
+},
+{
+  "pk": 35, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2013-11-03T09:53:05.115Z", 
+    "object_repr": "Beginning Knitting", 
+    "object_id": "4", 
+    "change_message": "Changed user and last_updated_user.", 
+    "user": 1, 
+    "content_type": 12
+  }
+},
+{
+  "pk": 36, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2013-11-03T09:53:18.730Z", 
+    "object_repr": "Oracle Learn Java", 
+    "object_id": "5", 
+    "change_message": "Changed user and last_updated_user.", 
+    "user": 1, 
+    "content_type": 12
+  }
+},
+{
+  "pk": 37, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2013-11-03T13:56:44.443Z", 
+    "object_repr": "Python in Practice", 
+    "object_id": "2", 
+    "change_message": "Changed user.", 
+    "user": 1, 
+    "content_type": 12
+  }
+},
+{
+  "pk": 1, 
+  "model": "voting.vote", 
+  "fields": {
+    "vote": 1, 
+    "time_stamp": "2013-09-09T20:53:24.016Z", 
+    "user": 3, 
+    "content_type": 12, 
+    "object_id": 1
+  }
+},
+{
+  "pk": 3, 
+  "model": "voting.vote", 
+  "fields": {
+    "vote": -1, 
+    "time_stamp": "2013-09-09T20:54:21.453Z", 
+    "user": 2, 
+    "content_type": 12, 
+    "object_id": 2
+  }
+},
+{
+  "pk": 4, 
+  "model": "voting.vote", 
+  "fields": {
+    "vote": 1, 
+    "time_stamp": "2013-09-09T20:54:35.491Z", 
+    "user": 3, 
+    "content_type": 12, 
+    "object_id": 2
+  }
+},
+{
+  "pk": 8, 
+  "model": "voting.vote", 
+  "fields": {
+    "vote": 1, 
+    "time_stamp": "2013-09-09T21:20:32.966Z", 
+    "user": 1, 
+    "content_type": 12, 
+    "object_id": 5
+  }
+},
+{
+  "pk": 9, 
+  "model": "voting.vote", 
+  "fields": {
+    "vote": 1, 
+    "time_stamp": "2013-11-03T09:53:33.422Z", 
+    "user": 1, 
+    "content_type": 12, 
+    "object_id": 1
+  }
+},
+{
+  "pk": 10, 
+  "model": "voting.vote", 
+  "fields": {
+    "vote": 1, 
+    "time_stamp": "2013-11-03T09:53:36.788Z", 
+    "user": 1, 
+    "content_type": 12, 
+    "object_id": 2
+  }
+},
+{
+  "pk": 11, 
+  "model": "voting.vote", 
+  "fields": {
+    "vote": 1, 
+    "time_stamp": "2013-11-03T10:28:59.803Z", 
+    "user": 1, 
+    "content_type": 12, 
+    "object_id": 7
+  }
+},
+{
+  "pk": 12, 
+  "model": "voting.vote", 
+  "fields": {
+    "vote": 1, 
+    "time_stamp": "2013-11-03T18:57:07.198Z", 
+    "user": 1, 
+    "content_type": 12, 
+    "object_id": 8
+  }
+},
+{
+  "pk": 13, 
+  "model": "voting.vote", 
+  "fields": {
+    "vote": 1, 
+    "time_stamp": "2013-11-03T19:10:36.934Z", 
+    "user": 1, 
+    "content_type": 12, 
+    "object_id": 4
+  }
+},
+{
+  "pk": 1, 
+  "model": "skillbook.skill", 
+  "fields": {
+    "update_date": "2013-09-07T18:54:24Z", 
+    "name": "Python", 
+    "creation_date": "2013-09-08T00:39:47Z", 
+    "user": 1, 
+    "last_updated_user": 1, 
+    "description": "Programming Language"
+  }
+},
+{
+  "pk": 2, 
+  "model": "skillbook.skill", 
+  "fields": {
+    "update_date": "2013-09-07T18:54:24Z", 
+    "name": "Java", 
+    "creation_date": "2013-09-07T18:54:24Z", 
+    "user": 1, 
+    "last_updated_user": 1, 
+    "description": "Cool language developed in 1992"
+  }
+},
+{
+  "pk": 3, 
+  "model": "skillbook.skill", 
+  "fields": {
+    "update_date": "2013-09-07T18:54:24Z", 
+    "name": "Knitting", 
+    "creation_date": "2013-09-08T21:58:24Z", 
+    "user": 3, 
+    "last_updated_user": 3, 
+    "description": "Learn how to knit"
+  }
+},
+{
+  "pk": 4, 
+  "model": "skillbook.skill", 
+  "fields": {
+    "update_date": "2013-09-07T18:54:24Z", 
+    "name": "Karate", 
+    "creation_date": "2013-09-08T16:08:03Z", 
+    "user": 2, 
+    "last_updated_user": 2, 
+    "description": "Martial Art"
+  }
+},
+{
+  "pk": 5, 
+  "model": "skillbook.skill", 
+  "fields": {
+    "update_date": "2013-09-07T18:54:24Z", 
+    "name": "Kick Boxing", 
+    "creation_date": "2013-09-10T21:18:41Z", 
+    "user": 2, 
+    "last_updated_user": 2, 
+    "description": "Martial Art"
+  }
+},
+{
+  "pk": 6, 
+  "model": "skillbook.skill", 
+  "fields": {
+    "update_date": "2013-09-07T18:54:24Z", 
+    "name": "Kick Fencing", 
+    "creation_date": "2013-09-10T21:22:23Z", 
+    "user": 2, 
+    "last_updated_user": 2, 
+    "description": "Martial Art"
+  }
+},
+{
+  "pk": 7, 
+  "model": "skillbook.skill", 
+  "fields": {
+    "update_date": "2013-11-03T10:31:37.472Z", 
+    "name": "Boxing", 
+    "creation_date": "2013-11-03T10:31:37.472Z", 
+    "user": 1, 
+    "last_updated_user": 1, 
+    "description": "Sport where contestants punch each other a lot."
+  }
+},
+{
+  "pk": 8, 
+  "model": "skillbook.skill", 
+  "fields": {
+    "update_date": "2013-11-03T17:57:28.630Z", 
+    "name": "Boating For Men", 
+    "creation_date": "2013-11-03T17:57:28.630Z", 
+    "user": 1, 
+    "last_updated_user": 1, 
+    "description": "Stuff about boats that only men enjoy"
+  }
+},
+{
+  "pk": 1, 
+  "model": "skillbook.resource", 
+  "fields": {
+    "update_date": "2013-11-03T16:02:48.339Z", 
+    "name": "Learning Python", 
+    "creation_date": "2013-09-08T02:11:16Z", 
+    "score": 2, 
+    "link": "http://www.amazon.co.uk/Learning-Python-Mark-Lutz/dp/1449355730", 
+    "user": 1, 
+    "last_updated_user": 1, 
+    "skill": 1, 
+    "description": "Starter book on pythonStarter book on pythonStarter book on pythonStarter book on pythonStarter book on pythonStarter book on pythonStarter book on pythonStarter book on python"
+  }
+},
+{
+  "pk": 2, 
+  "model": "skillbook.resource", 
+  "fields": {
+    "update_date": "2013-09-07T18:54:24Z", 
+    "name": "Python in Practice", 
+    "creation_date": "2013-09-08T02:36:21Z", 
+    "score": 1, 
+    "link": "http://www.amazon.co.uk/Python-Practice-Programs-Concurrency-Libraries/dp/0321905636/ref=zg_bs_40411", 
+    "user": 1, 
+    "last_updated_user": 1, 
+    "skill": 1, 
+    "description": "Create Better Programs Using Concurrency, Libraries, and Patterns"
+  }
+},
+{
+  "pk": 3, 
+  "model": "skillbook.resource", 
+  "fields": {
+    "update_date": "2013-09-07T18:54:24Z", 
+    "name": "Beginning Python", 
+    "creation_date": "2013-09-08T05:03:01Z", 
+    "score": 0, 
+    "link": "http://www.amazon.co.uk/Beginning-Python-From-Novice-Professional/dp/159059519X", 
+    "user": 1, 
+    "last_updated_user": 1, 
+    "skill": 1, 
+    "description": "From Novice to Professional"
+  }
+},
+{
+  "pk": 4, 
+  "model": "skillbook.resource", 
+  "fields": {
+    "update_date": "2013-09-07T18:54:24Z", 
+    "name": "Beginning Knitting", 
+    "creation_date": "2013-09-08T21:58:57Z", 
+    "score": 1, 
+    "link": "http://www.knittinghelp.com/", 
+    "user": 3, 
+    "last_updated_user": 3, 
+    "skill": 3, 
+    "description": "...."
+  }
+},
+{
+  "pk": 5, 
+  "model": "skillbook.resource", 
+  "fields": {
+    "update_date": "2013-09-07T18:54:24Z", 
+    "name": "Oracle Learn Java", 
+    "creation_date": "2013-09-08T16:28:44Z", 
+    "score": 1, 
+    "link": "http://docs.oracle.com/javase/tutorial/java/", 
+    "user": 3, 
+    "last_updated_user": 3, 
+    "skill": 2, 
+    "description": "Oracle free tutorial"
+  }
+},
+{
+  "pk": 7, 
+  "model": "skillbook.resource", 
+  "fields": {
+    "update_date": "2013-11-03T14:46:01.774Z", 
+    "name": "Learn Python the Hard Way", 
+    "creation_date": "2013-11-03T10:17:43.188Z", 
+    "score": 1, 
+    "link": "http://www.amazon.com/Learn-Python-Hard-Way-Shaw/dp/125785321X", 
+    "user": 1, 
+    "last_updated_user": 1, 
+    "skill": 1, 
+    "description": "##### This is a very beginner book for people who want to learn to code.\r\n\r\nIf you can already code then the book will probably drive you insane. It's intended for people who have no coding chops to build up their skills before starting a more detailed book. The 2nd Edition features 5 new exercises, fixes and updates to nearly every exercise, and three of the new exercises teach you to create a simple web application as the final part of the book."
+  }
+},
+{
+  "pk": 8, 
+  "model": "skillbook.resource", 
+  "fields": {
+    "update_date": "2013-11-03T19:16:31.066Z", 
+    "name": "Java 7 Spec", 
+    "creation_date": "2013-11-03T19:07:58.399Z", 
+    "score": 0, 
+    "link": "http://docs.oracle.com/javase/specs/jls/se7/html/index.html", 
+    "user": 1, 
+    "last_updated_user": 1, 
+    "skill": 2, 
+    "description": "The full Java 7 Spec in HTML"
+  }
+}
+]
