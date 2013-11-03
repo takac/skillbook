@@ -9,11 +9,10 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
 	url(r'^$', general.index, name='index'),
-	url(r'^admin/', include(admin.site.urls))
+	url(r'^admin/', include(admin.site.urls)),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-	url(r'^resources/create/$'                      , resources.resource_create , name='create resource') ,
 	url(r'^resources/(?P<resource_id>\d+)/vote/$'   , resources.vote            , name='vote')            ,
 	url(r'^resources/(?P<resource_id>\d+)/edit/$'   , resources.resource_edit   , name='edit resource')   ,
 	url(r'^resources/(?P<resource_id>\d+)/delete/$' , resources.resource_delete , name='delete resource') ,
@@ -21,6 +20,7 @@ urlpatterns = patterns('',
 	url(r'^resources/json/$'                        , resources.resources_json  , name='resources_json')  ,
 	url(r'^resources/$'                             , resources.resources_list  , name='resources_list')  ,
 
+	url(r'^skills/(?P<skill_id>\d+)/newresource/$' , resources.resource_create, name='resource edit')   ,
     url(r'^skills/$'                          , skills.skill_list   , name='skill_list')   ,
 	url(r'^skills/(?P<skill_id>\d+)/$'        , skills.skill        , name='skill')        ,
 	url(r'^skills/(?P<skill_id>\d+)/edit/$'   , skills.skill_edit   , name='skill edit')   ,

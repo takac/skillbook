@@ -4,7 +4,7 @@
 <h3>{{ view_user }}</h3>
 <h3>Points: {{ view_user.score }}</h3>
     {% if resources %}
-    <h4>Resources Added</h4>
+    <h4>Resources added</h4>
 		{% for i in resources %}
 		<div>
 			+{{ score_const.create_resource_score }} <a href="/resources/{{ i.url }}">{{ i }}</a>
@@ -12,10 +12,11 @@
 		</div>
 		{% endfor %}
     {% else %}
-    <h4>No skills added by user</h4>
+    <h4>No resources added by user</h4>
+    <br>
     {% endif %}
     {% if skills %}
-    <h4>Skills Added</h4>
+    <h4>Skills added</h4>
 		{% for i in skills %}
 		<p>+{{ score_const.create_skill_score }} <a href="/skills/{{ i.url }}">{{ i }}</a></p>
 		{% endfor %}
@@ -27,5 +28,4 @@
 {% block links %}
     <li><a href="/account/profile">User Profile</a></li>
     <li><a href="/skills/create">Add Skill</a></li>
-    <li><a href="/resources/create">Add Resource</a></li>
 {% endblock %}

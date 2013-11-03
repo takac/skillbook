@@ -23,33 +23,6 @@ def index(request):
 def logout_view(request):
     return logout(request)
 
-@login_required
-def vote(request, resource_id):
-    direction = request.GET.get('v', '')
-    skill_id = request.GET.get('skill', '')
-    resource = Resource.objects.get(id=resource_id)
-    vote = Vote.objects.get_for_user(resource, request.user)
-
-    if direction == 'none':
-        if vote:
-            vote.delete()
-    if direction == 'up':
-        if vote:
-            vote.vote = 1
-            vote.save()
-        else:
-            Vote.objects.record_vote(resource, request.user, 1)
-    if direction == 'down':
-        if vote:
-            vote.vote = -1
-            vote.save()
-        else:
-            Vote.objects.record_vote(resource, request.user, -1)
-    if skill_id:
-        return HttpResponseRedirect('/skills/'+skill_id)
-    else:
-        return HttpResponseRedirect('/resources')
-
 def user_profile(request):
     return render(request, 'account.html', None)
 

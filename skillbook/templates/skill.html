@@ -67,5 +67,5 @@
 
 {% block links %}
     <li><a href="/skills/create">Add Skill</a></li>
-    <li><a href="/resources/create?skill={{skill}}">Add Resource to {{skill}}</a></li>
+    <li><a href="/skills/{{skill.id}}/newresource">Add Resource to {{skill}}</a></li>
 {% endblock %}

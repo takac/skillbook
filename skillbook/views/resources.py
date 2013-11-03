@@ -62,7 +62,7 @@ class EditResourceForm(forms.Form):
     name = forms.CharField(max_length=40)
     link = forms.CharField(max_length=200)
     description = forms.CharField(max_length=500, widget=forms.Textarea)
-    skill = forms.ModelChoiceField(queryset=Skill.objects.all())
+    # skill = forms.ModelChoiceField(queryset=Skill.objects.all())
 
 class CreateResourceForm(EditResourceForm):
     def clean(self):
@@ -108,24 +108,19 @@ def resource_edit(request, resource_id):
             else:
                 return render(request, 'createresource.html', { "form": form, 'submit_to': resource_id + '/edit' } )
 
-def resource_create(request):
+def resource_create(request, skill_id):
     if request.method == 'GET':
         initial = {}
-        if request.GET.get('skill', ''):
-            try:
-                initial['skill'] = Skill.objects.get(name=request.GET.get('skill',''))
-            except Skill.DoesNotExist:
-                pass
-
+        initial['skill'] = Skill.objects.get(id=skill_id)
         form = CreateResourceForm(initial=initial)
-        return render(request, 'createresource.html', { 'form': form, 'submit_to': 'create'})
+        return render(request, 'createresource.html', { 'form': form, 'submit_to': '/skills/'+str(skill_id)+'/newresource/'})
     if request.method == 'POST':
         form = CreateResourceForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
             description = form.cleaned_data['description']
             link = form.cleaned_data['link']
-            skill = form.cleaned_data['skill']
+            skill = Skill.objects.get(id=skill_id)
             time = timezone.now()
             resouce = Resource.objects.create(
                     user=request.user,

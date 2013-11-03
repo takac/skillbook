@@ -4,8 +4,8 @@
         <meta charset="utf-8">
 
         <title>The Skillbook</title>
-        <meta name="description" content="some description">
-        <meta name="author" content="Tom">
+        <meta name="description" content="skillbook website">
+        <meta name="author" content="Tom Cammann">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		{% load staticfiles %}
@@ -21,41 +21,50 @@
     </head>
 
     <body>
-        <script type="text/javascript" src="{% static "js/lib/jquery.js" %}"></script>
-        <script type="text/javascript" src="{% static "js/lib/jquery-ui.js" %}"></script>
-        <script type="text/javascript" src="{% static "js/lib/bootstrap.js" %}"></script>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <div class="nav-collapse collapse">
-                        <ul class="nav">
-                            <li><a href="/skills">Skills List</a></li>
-                            <!-- <li><a href="/resources">Resource List</a></li> -->
-                            {% if user.is_authenticated %}
-                            <li><a href="/account/activity">{{user.username}}: {{user.score}}</a></li>
-                            <li><a href="/account/logout">Sign Out</a></li>
-                            {% else %}
-                            <li><a href="/account/login">Sign In</a></li>
-                            <li><a href="/account/create">Create Account</a></li>
+
+        <div class="container">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <a class="brand" href="/">Skillbook</a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                <li><a href="/skills">Skills List</a></li>
+                                <li><a href="/resources">Resource List</a></li>
+                                {% if user.is_authenticated %}
+                                <li><a href="/account/activity">{{user.username}}: {{user.score}}</a></li>
+                                {% endif %}
+                            </ul>
+                            <ul class="nav pull-right">
+                                {% if user.is_authenticated %}
+                                <li><a href="/account/logout">Sign Out</a></li>
+                                {% else %}
+                                <li><a href="/account/login">Sign In</a></li>
+                                <li><a href="/account/create">Create Account</a></li>
+                            </ul>
                             {% endif %}
-                        </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="span3 bs-docs-sidebar">
-                    <ul class="nav nav-list bs-docs-sidenav affix">
-                        <li class="nav-header">Links</li>
-                        {% block links %}{% endblock %}
-                    </ul>
-                </div>
-                <div class="span9">
-                    {% block body %}{% endblock %}
+
+            <div class="container">
+                <div class="row">
+                    <div class="span3 bs-docs-sidebar">
+                        <ul class="nav nav-list bs-docs-sidenav affix">
+                            <li class="nav-header">Links</li>
+                            {% block links %}{% endblock %}
+                        </ul>
+                    </div>
+                    <div class="span9">
+                        {% block body %}{% endblock %}
+                    </div>
                 </div>
             </div>
-        </div>
-        {% block bottom %}{% endblock %}
-    </body>
+            {% block bottom %}{% endblock %}
+
+            <script type="text/javascript" src="{% static "js/lib/jquery.js" %}"></script>
+            <script type="text/javascript" src="{% static "js/lib/jquery-ui.js" %}"></script>
+            <script type="text/javascript" src="{% static "js/lib/bootstrap.js" %}"></script>
+        </body>
 </html>

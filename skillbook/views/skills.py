@@ -22,7 +22,7 @@ class EditSkillForm(forms.Form):
     name = forms.CharField(max_length=25)
     description = forms.CharField(max_length=200, widget=forms.Textarea)
 
-class CreateSkillForm(forms.Form):
+class CreateSkillForm(EditSkillForm):
     def clean(self):
         name = self.cleaned_data.get('name')
         if Skill.objects.filter(name=name).exists():
@@ -32,7 +32,7 @@ class CreateSkillForm(forms.Form):
 @login_required
 def skill_create(request):
     if request.method == 'GET':
-        return render(request, 'createskill.html', { 'form': CreateSkillForm(), 'submit_to': 'create' })
+        return render(request, 'createskill.html', { 'form': CreateSkillForm(), 'submit_to': '/skills/create/' })
     if request.method == 'POST':
         form = CreateSkillForm(request.POST)
         if form.is_valid():
@@ -48,7 +48,7 @@ def skill_create(request):
                     creation_date=time)
             return HttpResponseRedirect('/skills/')
         else:
-            return render(request, 'createskill.html', { "form": form, 'submit_to': 'create'} )
+            return render(request, 'createskill.html', { "form": form, 'submit_to': '/skills/create/'} )
 
 @login_required
 def skill_delete(request, skill_id):
