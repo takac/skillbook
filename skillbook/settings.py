@@ -104,7 +104,10 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'skillbook.urls'
 
-LOGIN_REDIRECT_URL = '/accounts/activity'
+# Custom login urls, default is 'accounts'
+LOGIN_REDIRECT_URL = '/account/activity'
+LOGIN_URL = '/account/login'
+LOGOUT_URL = '/account/logout'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'skillbook.wsgi.application'

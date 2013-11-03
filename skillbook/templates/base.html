@@ -32,11 +32,11 @@
                             <li><a href="/skills">Skills List</a></li>
                             <!-- <li><a href="/resources">Resource List</a></li> -->
                             {% if user.is_authenticated %}
-                            <li><a href="/accounts/activity">{{user.username}}: {{user.score}}</a></li>
-                            <li><a href="/accounts/logout">Sign Out</a></li>
+                            <li><a href="/account/activity">{{user.username}}: {{user.score}}</a></li>
+                            <li><a href="/account/logout">Sign Out</a></li>
                             {% else %}
-                            <li><a href="/accounts/login">Sign In</a></li>
-                            <li><a href="/accounts/create">Create Account</a></li>
+                            <li><a href="/account/login">Sign In</a></li>
+                            <li><a href="/account/create">Create Account</a></li>
                             {% endif %}
                         </ul>
                     </div>

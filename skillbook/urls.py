@@ -30,11 +30,12 @@ urlpatterns = patterns('',
 	url(r'^users/(?P<username>\w+)/$', views.users, name='users'),
 	url(r'^users/$', views.users_list, name='users_list'),
 
-	(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
-	(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/accounts/login'}),
-	url(r'^accounts/activity/$', views.activity, name='user activity'),
-	url(r'^accounts/rofile/$', views.user_profile, name='user_profile'),
-	url(r'^accounts/create/$', views.adduser, name='create user'),
+	(r'^account/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
+	(r'^account/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/account/login'}),
+	url(r'^account/activity/$', views.activity, name='user activity'),
+	url(r'^account/$', views.activity_redirect, name='user activity'),
+	url(r'^account/profile/$', views.user_profile, name='user_profile'),
+	url(r'^account/create/$', views.adduser, name='create user'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

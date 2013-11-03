@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-<form action="/accounts/add/" method="POST">
+<form action="/account/add/" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <p><input type="submit" value="Create Account"></p>

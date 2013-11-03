@@ -69,6 +69,9 @@ def users(request, username):
     context = { 'resources': resources, 'skills': skills, 'view_user': view_user}
     return render(request, 'users.html', context)
 
+def activity_redirect(request):
+        return HttpResponseRedirect('/account/activity')
+
 @login_required
 def activity(request):
     resources = request.user.resource_set.all()
