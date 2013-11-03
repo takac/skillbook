@@ -101,9 +101,16 @@ def adduser(request):
     form = CreateUserForm()
     return render(request, 'createuser.html', { "form": form } )
 
-class CreateSkillForm(forms.Form):
+class EditSkillForm(forms.Form):
     name = forms.CharField(max_length=25)
     description = forms.CharField(max_length=200, widget=forms.Textarea)
+
+class CreateSkillForm(forms.Form):
+    def clean(self):
+        name = self.cleaned_data.get('name')
+        if Skill.objects.filter(name=name).exists():
+            self._errors['name'] = self.error_class(['Skill with this name already exists'])
+        return self.cleaned_data
 
 @login_required
 def skill_create(request):
@@ -126,10 +133,14 @@ def skill_create(request):
         else:
             return render(request, 'createskill.html', { "form": form, 'submit_to': 'create'} )
 
+@login_required
 def skill_delete(request, skill_id):
     skill= Skill.objects.get(id=skill_id)
-    skill.delete()
-    return HttpResponseRedirect('/skills/')
+    if skill.user == request.user or request.user.score() > 29:
+        # skill.delete()
+        return HttpResponseRedirect('/skills/')
+    else:
+        return HttpResponseRedirect('/skills/'+skill.url+'?err=failed_delete')
 
 def skill_edit(request, skill_id):
     if request.method == 'GET':
@@ -137,14 +148,15 @@ def skill_edit(request, skill_id):
         init = {};
         init['name'] = skill.name
         init['description'] = skill.description
-        form = CreateSkillForm(init);
+        form = EditSkillForm(init);
         return render(request, 'createskill.html', { "form": form, 'submit_to': skill_id+'/edit'} )
     if request.method == 'POST':
-        form = CreateSkillForm(request.POST)
+        form = EditSkillForm(request.POST)
         if form.is_valid():
             skill = Skill.objects.get(id=skill_id)
             skill.name = form.cleaned_data['name']
             skill.description = form.cleaned_data['description']
+            skill.update_date = timezone.now()
             skill.save()
             return HttpResponseRedirect('/skills/')
         else:
@@ -201,17 +213,30 @@ def resources_json(request):
     resources = Resource.objects.order_by('creation_date')
     return HttpResponse(json.dumps(resources), content_type="application/json")
 
-class CreateResourceForm(forms.Form):
+class EditResourceForm(forms.Form):
     name = forms.CharField(max_length=40)
     link = forms.CharField(max_length=200)
     description = forms.CharField(max_length=500, widget=forms.Textarea)
     skill = forms.ModelChoiceField(queryset=Skill.objects.all())
 
+class CreateResourceForm(EditResourceForm):
+    def clean(self):
+        name = self.cleaned_data.get('name')
+        skill = self.cleaned_data.get('skill')
+        if Resource.objects.filter(name=name, skill=skill).exists():
+            self._errors['name'] = self.error_class(['A resource with this name already exists for '+skill.name])
+        return self.cleaned_data
+
+@login_required
 def resource_delete(request, resource_id):
     resource = Resource.objects.get(id=resource_id)
-    resource.delete()
-    return HttpResponseRedirect('/skills/'+str(resource.skill.id))
+    if resource.user == request.user or request.user.score() > 29:
+        # resource.delete()
+        return HttpResponseRedirect('/skills/'+str(resource.skill.id))
+    else:
+        return HttpResponseRedirect('/skills/?delete=failed')
 
+@login_required
 def resource_edit(request, resource_id):
     if request.method == 'GET':
         resource = Resource.objects.get(id=resource_id)
@@ -220,18 +245,19 @@ def resource_edit(request, resource_id):
         init['description'] = resource.description
         init['link'] = resource.link
         init['skill'] = resource.skill.id
-        form = CreateResourceForm(init)
+        form = EditResourceForm(init)
         return render(request, 'createresource.html', { 'form': form, 'submit_to': resource_id+'/edit' })
     if request.method == 'POST':
-        form = CreateResourceForm(request.POST)
+        form = EditResourceForm(request.POST)
         if form.is_valid():
             resource = Resource.objects.get(id=resource_id)
             resource.name = form.cleaned_data['name']
             resource.description = form.cleaned_data['description']
             resource.link = form.cleaned_data['link']
             resource.skill = form.cleaned_data['skill']
+            resource.update_date = timezone.now()
             resource.save()
-            return HttpResponseRedirect('/skills/'+str(resource.skill.id)+'/')
+            return HttpResponseRedirect('/resources/'+str(resource.id)+'/')
         else:
             return render(request, 'createresource.html', { "form": form, 'submit_to': resource_id + '/edit' } )
 

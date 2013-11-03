@@ -104,6 +104,8 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'skillbook.urls'
 
+LOGIN_REDIRECT_URL = '/accounts/activity'
+
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'skillbook.wsgi.application'
 
@@ -125,6 +127,7 @@ INSTALLED_APPS = (
 	'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'django_markup',
 	'voting',
 	'skillbook'
 )

@@ -1,14 +1,28 @@
 {% extends "base.html" %}
 
 {% block body %}
+{% load markup_tags %}
 <h3>
     {{ resource.name }}
 </h3>
-<p><a href="{{resource.link}}">{{ resource.stripped_link }}</a></p>
-<p>{{ resource.description }}</p>
+<p>
+    <a href="{{resource.link}}">{{ resource.stripped_link | truncatechars:60 }}</a>
+</p>
+<p>{{ resource.description | apply_markup:"markdown" }}</p>
 
-<br>
-<a href="/resources/{{ resource.url }}/delete">Delete Resource</a>
+<p style="font-size: 70%">
+    Added by <a href="/users/{{resource.user.url}}/">{{ resource.user.username}}</a> on {{ resource.creation_date }}
+    {% if not resource.creation_date == resources.update_date %}
+    updated on {{ resource.update_date }}
+    {% endif %}
+</p>
+
+{% if user.is_authenticated %}
+<span>
+    <a style="padding-right:6px; border-right: 1px solid #717171;" href="/resources/{{ resource.url }}/edit">Edit Resource</a>
+    <a href="/resources/{{ resource.url }}/delete">Delete Resource</a>
+</span>
+{% endif %}
 {% endblock %}
 
 {% block links %}

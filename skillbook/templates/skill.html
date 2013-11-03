@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block body %}
+{% load markup_tags %}
 <h3>{{ skill }}</h3>
+    <p>{{ skill.description | apply_markup:"markdown" }}</p>
 	{% if resources %}
 	<table class="table">
 		<tr>
@@ -44,8 +46,23 @@
             </td>
 		</tr>
     {% endfor %}
+    </table>
     {% endif %}
-    <a href="/skills/{{skill.url}}/delete">Delete Skill</a>
+
+<p style="font-size: 70%">
+    Added by: <a href="/users/{{skill.user.url}}/">{{ skill.user.username}}</a> on {{ skill.creation_date }}
+    {% if not skill.creation_date == skill.update_date %}
+    updated on {{ skill.update_date }}
+    {% endif %}
+</p>
+
+{% if user.is_authenticated %}
+<span>
+    <a style="padding-right:6px; border-right: 1px solid #717171;" href="/skills/{{skill.url}}/delete">Delete Skill</a>
+    <a href="/skills/{{skill.url}}/edit">Edit Skill</a>
+</span>
+{% endif %}
+
 {% endblock %}
 
 {% block links %}
