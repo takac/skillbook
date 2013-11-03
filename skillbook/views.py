@@ -1,4 +1,5 @@
 import json
+import logging
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.db.models import Sum, Avg
 from django import forms
@@ -11,6 +12,8 @@ from django.contrib.auth import authenticate, login, logout
 from voting.models import Vote
 
 from skillbook.models import Skill, Resource, ScoreConst
+
+logger = logging.getLogger(__name__)
 
 def index(request):
     skills = Skill.objects.order_by('creation_date')[:5]
@@ -112,8 +115,13 @@ def skill_create(request):
             name = form.cleaned_data['name']
             description = form.cleaned_data['description']
             time = timezone.now()
-            Skill.objects.create(user=request.user,
-                    name=name, description=description,creation_date=time)
+            Skill.objects.create(
+                    user=request.user,
+                    last_updated_user=request.user,
+                    name=name,
+                    description=description,
+                    update_date=time,
+                    creation_date=time)
             return HttpResponseRedirect('/skills/')
         else:
             return render(request, 'createskill.html', { "form": form, 'submit_to': 'create'} )
@@ -191,8 +199,13 @@ def resources_json(request):
 class CreateResourceForm(forms.Form):
     name = forms.CharField(max_length=40)
     link = forms.CharField(max_length=200)
-    description = forms.CharField(max_length=200, widget=forms.Textarea)
+    description = forms.CharField(max_length=500, widget=forms.Textarea)
     skill = forms.ModelChoiceField(queryset=Skill.objects.all())
+
+def resource_delete(request, resource_id):
+    resource = Resource.objects.get(id=resource_id)
+    resource.delete()
+    return HttpResponseRedirect('/skills/'+str(resource.skill.id))
 
 def resource_edit(request, resource_id):
     if request.method == 'GET':
@@ -215,8 +228,7 @@ def resource_edit(request, resource_id):
             resource.save()
             return HttpResponseRedirect('/skills/'+str(resource.skill.id)+'/')
         else:
-            return render(request, 'createresource.html', { "form": form } )
-
+            return render(request, 'createresource.html', { "form": form, 'submit_to': resource_id + '/edit' } )
 
 def resource_create(request):
     if request.method == 'GET':
@@ -237,11 +249,20 @@ def resource_create(request):
             link = form.cleaned_data['link']
             skill = form.cleaned_data['skill']
             time = timezone.now()
-            resouce = Resource.objects.create(user=request.user,
-                    name=name, description=description,creation_date=time, link=link,skill=skill)
-            return HttpResponseRedirect('/skills/'+resouce.skill.id+'/')
+            resouce = Resource.objects.create(
+                    user=request.user,
+                    last_updated_user=request.user,
+                    score=0,
+                    name=name,
+                    description=description,
+                    update_date=time,
+                    creation_date=time,
+                    link=link,
+                    skill=skill)
+
+            return HttpResponseRedirect('/skills/' + str(resouce.skill.id) + '/')
         else:
-            return render(request, 'createresource.html', { "form": form } )
+            return render(request, 'createresource.html', { "form": form, 'submit_to': 'create'} )
 
 
 

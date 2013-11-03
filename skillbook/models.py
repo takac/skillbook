@@ -29,7 +29,7 @@ auth.models.User.add_to_class('score', user_score)
 
 class Skill(models.Model):
 	name = models.CharField(max_length=50)
-	description = models.CharField(max_length=200)
+	description = models.CharField(max_length=500)
 	user = models.ForeignKey(User)
 	creation_date = models.DateTimeField('date created')
 	update_date = models.DateTimeField('last updated')
@@ -42,7 +42,7 @@ class Skill(models.Model):
 class Resource(models.Model):
 	name = models.CharField(max_length=50)
 	score = models.SmallIntegerField()
-	description = models.CharField(max_length=200)
+	description = models.CharField(max_length=500)
 	link = models.CharField(max_length=100)
 	skill = models.ForeignKey(Skill)
 	user = models.ForeignKey(User)

@@ -6,7 +6,11 @@
 </h3>
 <p><a href="{{resource.link}}">{{ resource.stripped_link }}</a></p>
 <p>{{ resource.description }}</p>
+
+<br>
+<a href="/resources/{{ resource.url }}/delete">Delete Resource</a>
 {% endblock %}
+
 {% block links %}
 <li><a href="/skills/{{ resource.skill.url }}">{{ resource.skill.name | title }}</a></li>
 {% endblock %}
