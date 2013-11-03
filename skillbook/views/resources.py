@@ -22,8 +22,9 @@ def resource(request, resource_id):
     return render(request, 'resource.html', { 'resource': Resource.objects.get(id=resource_id)})
 
 def resources_list(request):
-    resources = Resource.objects.order_by('creation_date')
+    resources = Resource.objects.order_by('-creation_date')
     context = { 'resources': resources }
+    return render(request, 'resources.html', context)
 
 @login_required
 def vote(request, resource_id):
@@ -35,24 +36,23 @@ def vote(request, resource_id):
     if direction == 'none':
         if vote:
             vote.delete()
-    if direction == 'up':
+    elif direction == 'up':
         if vote:
             vote.vote = 1
             vote.save()
         else:
             Vote.objects.record_vote(resource, request.user, 1)
-    if direction == 'down':
+    elif direction == 'down':
         if vote:
             vote.vote = -1
             vote.save()
         else:
             Vote.objects.record_vote(resource, request.user, -1)
+
     if skill_id:
         return HttpResponseRedirect('/skills/'+skill_id)
     else:
         return HttpResponseRedirect('/resources')
-
-    return render(request, 'resources.html', context)
 
 def resources_json(request):
     resources = Resource.objects.order_by('creation_date')
@@ -91,9 +91,8 @@ def resource_edit(request, resource_id):
             init['name'] = resource.name
             init['description'] = resource.description
             init['link'] = resource.link
-            init['skill'] = resource.skill.id
             form = EditResourceForm(init)
-            return render(request, 'createresource.html', { 'form': form, 'submit_to': resource_id+'/edit' })
+            return render(request, 'createresource.html', { 'form': form, 'submit_to': '/resources/'+resource_id+'/edit/' })
         if request.method == 'POST':
             form = EditResourceForm(request.POST)
             if form.is_valid():
@@ -101,7 +100,6 @@ def resource_edit(request, resource_id):
                 resource.name = form.cleaned_data['name']
                 resource.description = form.cleaned_data['description']
                 resource.link = form.cleaned_data['link']
-                resource.skill = form.cleaned_data['skill']
                 resource.update_date = timezone.now()
                 resource.save()
                 return HttpResponseRedirect('/resources/'+str(resource.id)+'/')

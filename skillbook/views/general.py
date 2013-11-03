@@ -17,7 +17,8 @@ logger = logging.getLogger(__name__)
 
 def index(request):
     skills = Skill.objects.order_by('creation_date')[:5]
-    context = { 'skills': skills }
+    resources = Resource.objects.order_by('creation_date')[:10]
+    context = { 'skills': skills, 'resources': resources}
     return render(request, 'home.html', context)
 
 def logout_view(request):

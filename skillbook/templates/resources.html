@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block body %}
+{% load tz %}
 <h3>Resource List</h3>
 	{% if resources %}
 	<table class="table">
@@ -10,6 +11,7 @@
 			<th>User</th>
 			<th>Creation Date</th>
 		</tr>
+    {% localtime on %}
     {% for r in resources %}
 		<tr>
 			<td><a href="/resources/{{ r.url }}">{{ r.name }}</a></td>
@@ -18,9 +20,10 @@
 			<td>{{ r.creation_date }}</td>
 		</tr>
     {% endfor %}
+    {% endlocaltime %}
 	</table>
 	{% endif %}
 {% endblock %}
 {% block links %}
-    <li><a href="/addskill">Add Skill</a></li>
+    <li><a href="/skills/create">Add Skill</a></li>
 {% endblock %}

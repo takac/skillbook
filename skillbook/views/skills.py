@@ -82,7 +82,7 @@ def skill_edit(request, skill_id):
                 return render(request, 'createskill.html', { "form": form, 'submit_to': 'create'} )
 
 def skill_list(request):
-    skills = Skill.objects.order_by('creation_date')[:10]
+    skills = Skill.objects.order_by('-creation_date')[:10]
     context = { 'skills': skills }
     return render(request, 'skills.html', context)
 

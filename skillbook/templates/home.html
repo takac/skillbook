@@ -4,8 +4,19 @@
 <h1>Welcome to Skillbook</h1>
 Here you will find all the resources you need to get learning any skill you
 want right away.
-{% if skills %}
+<h4>Lastest Resources</h4>
+{% if resources %}
+    <ul>
+    {% for resource in resources%}
+        <li><a href="/resources/{{ resource.id }}/">{{ resource.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No resources are available.</p>
+{% endif %}
+
 <h4>Lastest Skills</h4>
+{% if skills %}
     <ul>
     {% for skill in skills %}
         <li><a href="/skills/{{ skill.id }}/">{{ skill.name }}</a></li>
