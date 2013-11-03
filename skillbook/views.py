@@ -15,6 +15,11 @@ from skillbook.models import Skill, Resource, ScoreConst
 
 logger = logging.getLogger(__name__)
 
+USER_CAN_DELETE_RESOURCE_SCORE = 30
+USER_CAN_EDIT_RESOURCE_SCORE = 30
+USER_CAN_DELETE_SKILL_SCORE = 50
+USER_CAN_EDIT_SKILL_SCORE = 50
+
 def index(request):
     skills = Skill.objects.order_by('creation_date')[:5]
     context = { 'skills': skills }
@@ -66,7 +71,7 @@ def users(request, username):
 
     resources = view_user.resource_set.all()
     skills = view_user.skill_set.all()
-    context = { 'resources': resources, 'skills': skills, 'view_user': view_user}
+    context = { 'resources': resources, 'skills': skills, 'view_user': view_user, 'score_const': ScoreConst()}
     return render(request, 'users.html', context)
 
 def activity_redirect(request):
@@ -139,31 +144,33 @@ def skill_create(request):
 @login_required
 def skill_delete(request, skill_id):
     skill= Skill.objects.get(id=skill_id)
-    if skill.user == request.user or request.user.score() > 29:
-        # skill.delete()
+    if skill.user == request.user or request.user.score() >= USER_CAN_DELETE_SKILL_SCORE:
+        skill.delete()
         return HttpResponseRedirect('/skills/')
     else:
         return HttpResponseRedirect('/skills/'+skill.url+'?err=failed_delete')
 
 def skill_edit(request, skill_id):
-    if request.method == 'GET':
-        skill = Skill.objects.get(id=skill_id);
-        init = {};
-        init['name'] = skill.name
-        init['description'] = skill.description
-        form = EditSkillForm(init);
-        return render(request, 'createskill.html', { "form": form, 'submit_to': skill_id+'/edit'} )
-    if request.method == 'POST':
-        form = EditSkillForm(request.POST)
-        if form.is_valid():
-            skill = Skill.objects.get(id=skill_id)
-            skill.name = form.cleaned_data['name']
-            skill.description = form.cleaned_data['description']
-            skill.update_date = timezone.now()
-            skill.save()
-            return HttpResponseRedirect('/skills/')
-        else:
-            return render(request, 'createskill.html', { "form": form, 'submit_to': 'create'} )
+    skill = Skill.objects.get(id=skill_id);
+    # TODO add redirect
+    if skill.user == request.user or request.user.score() >= USER_CAN_EDIT_SKILL_SCORE:
+        if request.method == 'GET':
+            init = {};
+            init['name'] = skill.name
+            init['description'] = skill.description
+            form = EditSkillForm(init);
+            return render(request, 'createskill.html', { "form": form, 'submit_to': skill_id+'/edit'} )
+        if request.method == 'POST':
+            form = EditSkillForm(request.POST)
+            if form.is_valid():
+                skill = Skill.objects.get(id=skill_id)
+                skill.name = form.cleaned_data['name']
+                skill.description = form.cleaned_data['description']
+                skill.update_date = timezone.now()
+                skill.save()
+                return HttpResponseRedirect('/skills/')
+            else:
+                return render(request, 'createskill.html', { "form": form, 'submit_to': 'create'} )
 
 def skill_list(request):
     skills = Skill.objects.order_by('creation_date')[:10]
@@ -233,36 +240,38 @@ class CreateResourceForm(EditResourceForm):
 @login_required
 def resource_delete(request, resource_id):
     resource = Resource.objects.get(id=resource_id)
-    if resource.user == request.user or request.user.score() > 29:
-        # resource.delete()
+    if resource.user == request.user or request.user.score() >= USER_CAN_DELETE_RESOURCE_SCORE:
+        resource.delete()
         return HttpResponseRedirect('/skills/'+str(resource.skill.id))
     else:
         return HttpResponseRedirect('/skills/?delete=failed')
 
 @login_required
 def resource_edit(request, resource_id):
-    if request.method == 'GET':
-        resource = Resource.objects.get(id=resource_id)
-        init = {}
-        init['name'] = resource.name
-        init['description'] = resource.description
-        init['link'] = resource.link
-        init['skill'] = resource.skill.id
-        form = EditResourceForm(init)
-        return render(request, 'createresource.html', { 'form': form, 'submit_to': resource_id+'/edit' })
-    if request.method == 'POST':
-        form = EditResourceForm(request.POST)
-        if form.is_valid():
-            resource = Resource.objects.get(id=resource_id)
-            resource.name = form.cleaned_data['name']
-            resource.description = form.cleaned_data['description']
-            resource.link = form.cleaned_data['link']
-            resource.skill = form.cleaned_data['skill']
-            resource.update_date = timezone.now()
-            resource.save()
-            return HttpResponseRedirect('/resources/'+str(resource.id)+'/')
-        else:
-            return render(request, 'createresource.html', { "form": form, 'submit_to': resource_id + '/edit' } )
+    # TODO add redirect
+    resource = Resource.objects.get(id=resource_id)
+    if resource.user == request.user or request.user.score() >= USER_CAN_EDIT_RESOURCE_SCORE:
+        if request.method == 'GET':
+            init = {}
+            init['name'] = resource.name
+            init['description'] = resource.description
+            init['link'] = resource.link
+            init['skill'] = resource.skill.id
+            form = EditResourceForm(init)
+            return render(request, 'createresource.html', { 'form': form, 'submit_to': resource_id+'/edit' })
+        if request.method == 'POST':
+            form = EditResourceForm(request.POST)
+            if form.is_valid():
+                resource = Resource.objects.get(id=resource_id)
+                resource.name = form.cleaned_data['name']
+                resource.description = form.cleaned_data['description']
+                resource.link = form.cleaned_data['link']
+                resource.skill = form.cleaned_data['skill']
+                resource.update_date = timezone.now()
+                resource.save()
+                return HttpResponseRedirect('/resources/'+str(resource.id)+'/')
+            else:
+                return render(request, 'createresource.html', { "form": form, 'submit_to': resource_id + '/edit' } )
 
 def resource_create(request):
     if request.method == 'GET':

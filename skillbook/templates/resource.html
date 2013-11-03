@@ -2,13 +2,18 @@
 
 {% block body %}
 {% load markup_tags %}
-<h3>
+<h4>
     {{ resource.name }}
-</h3>
+</h4>
 <p>
     <a href="{{resource.link}}">{{ resource.stripped_link | truncatechars:60 }}</a>
 </p>
-<p>{{ resource.description | apply_markup:"markdown" }}</p>
+<p>
+    <span style="font-size: 80%">Description</span>
+    {{ resource.description | apply_markup:"markdown" }}
+</p>
+
+<div style="height:1px; background:#717171; border-bottom:0.2px"></div>
 
 <p style="font-size: 70%">
     Added by <a href="/users/{{resource.user.url}}/">{{ resource.user.username}}</a> on {{ resource.creation_date }}
