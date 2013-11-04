@@ -94,13 +94,13 @@ def skills_json(request):
     skills = Skill.objects.order_by('creation_date')
     if term:
         skills = [skill for skill in skills if term.lower() in skill.name.lower()]
-    d = {}
+    d = []
     for i in skills:
         xd = {}
         xd['name'] = i.name
         xd['id'] = i.id
         xd['creation_date'] = i.creation_date.strftime("%H:%M:%S %d/%m/%Y")
-        d[i.id] = xd
+        d.append(xd)
 
     return HttpResponse(json.dumps(d), content_type="application/json")
 

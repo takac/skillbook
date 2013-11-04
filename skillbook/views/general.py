@@ -1,4 +1,3 @@
-import json
 import logging
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.db.models import Sum, Avg
@@ -24,6 +23,7 @@ def index(request):
 def logout_view(request):
     return logout(request)
 
+@login_required
 def user_profile(request):
     return render(request, 'account.html', None)
 

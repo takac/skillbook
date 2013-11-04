@@ -9,7 +9,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
 	url(r'^$', general.index, name='index'),
-	url(r'^admin/', include(admin.site.urls)),
+    (r'^grappelli/', include('grappelli.urls')), # grappelli URLS
+	(r'^admin/', include(admin.site.urls)),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

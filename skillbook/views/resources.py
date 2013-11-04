@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
+from django.core import serializers
+
 from voting.models import Vote
 
 from skillbook.models import Skill, Resource, ScoreConst
@@ -55,8 +57,20 @@ def vote(request, resource_id):
         return HttpResponseRedirect('/resources')
 
 def resources_json(request):
-    resources = Resource.objects.order_by('creation_date')
-    return HttpResponse(json.dumps(resources), content_type="application/json")
+    term = None
+    query = None
+    if request.method == 'GET':
+        term = request.GET.get('term', '')
+    if request.method == 'POST':
+        term = request.POST.get('term', '')
+    if term:
+        query = Resource.objects.filter(name__contains=term)
+    else:
+        query = Resource.objects.all()
+    
+    data = serializers.serialize("json", query)
+
+    return HttpResponse(data, content_type="application/json")
 
 class EditResourceForm(forms.Form):
     name = forms.CharField(max_length=40)
