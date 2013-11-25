@@ -8,3 +8,5 @@ and review the resources.
 
 Learning new skills often requires a lot of time and effort to find good learning resources, Skillbook
 removes the effort by allowing users to share the best resources for learning any skill and then ranking them.
+
+<img src="screenshots/skillbook-screenshot.png" height="50%" width="50%" alt="skillbook screenshot"/>
